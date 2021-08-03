@@ -6,12 +6,13 @@ import MaterialIcon from '@material/react-material-icon';
 import logo from '../../assets/logo.svg';
 import restaurant from '../../assets/restaurante-fake.png';
 
-import { Card } from '../../components';
+import { Card, RestaurantCard, Modal } from '../../components';
 
 import { Container, Search, Logo, Wrapper, Map, CarouselTitle, Carousel } from './styles';
 
 const Home = () => {
   const [inputValue, setInputValue] = useState('');
+  const [modalOpened, setModalOpened] = useState(false);
 
   const settings = {
     dots: false, // pontinhos
@@ -48,9 +49,14 @@ const Home = () => {
             <Card photo={restaurant}> Nome do Restaurante</Card>
             <Card photo={restaurant}> Nome do Restaurante</Card>
           </Carousel>
+          <button onClick={() => setModalOpened(true)}>Abrir Modal</button>
         </Search>
+        <RestaurantCard />
       </Container>
       <Map />
+      <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
+        Bla Bla Bla
+      </Modal>
     </Wrapper>
   );
 };
