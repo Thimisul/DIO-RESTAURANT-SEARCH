@@ -30,7 +30,7 @@ export const Logo = styled.img`
 
 export const Carousel = styled(Slider)`
   .slick-slide {
-    margin-right: 16px;
+    margin-right: 30px;
   }
 `;
 
