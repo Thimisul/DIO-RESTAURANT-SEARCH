@@ -9,14 +9,24 @@ import restaurante from '../../assets/restaurante-fake.png';
 
 import { Card, RestaurantCard, Modal, Map } from '../../components';
 
-import { Container, Search, Logo, Wrapper, CarouselTitle, Carousel } from './styles';
+import {
+  Container,
+  Search,
+  Logo,
+  Wrapper,
+  CarouselTitle,
+  Carousel,
+  ModalTitle,
+  ModalContent,
+} from './styles';
 
 const Home = () => {
   const [inputValue, setInputValue] = useState('');
   const [query, setQuery] = useState('');
   const [modalOpened, setModalOpened] = useState(false);
+  const [placeId, setPlaceId] = useState('');
 
-  const { restaurants } = useSelector((state) => state.restaurants);
+  const { restaurants, restaurantSelected } = useSelector((state) => state.restaurants);
 
   const settings = {
     dots: false, // pontinhos
@@ -32,6 +42,11 @@ const Home = () => {
     if (e.key === 'Enter') {
       setQuery(inputValue);
     }
+  }
+
+  function handleOpenModal(placeId) {
+    setPlaceId(placeId);
+    setModalOpened(true);
   }
 
   return (
@@ -60,15 +75,23 @@ const Home = () => {
               </Card>
             ))}
           </Carousel>
-          <button onClick={() => setModalOpened(true)}>Abrir Modal</button>
         </Search>
         {restaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.place_id} restaurant={restaurant} />
+          <RestaurantCard
+            key={restaurant.place_id}
+            onClick={() => handleOpenModal(restaurant.place_id)}
+            restaurant={restaurant}
+          />
         ))}
       </Container>
-      <Map query={query} />
+      <Map query={query} placeId={placeId} />
       <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
-        Bla Bla Bla
+        <ModalTitle>{restaurantSelected?.name}</ModalTitle>
+        <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
+        <ModalContent>{restaurantSelected?.formatted_address}</ModalContent>
+        <ModalContent>
+          {restaurantSelected?.opening_hours?.open_now ? `Aberto Agora :D` : `Fechado Agora :(`}
+        </ModalContent>
       </Modal>
     </Wrapper>
   );

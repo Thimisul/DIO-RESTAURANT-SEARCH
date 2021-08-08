@@ -4,8 +4,8 @@ import { Restaurant, RestaurantPhoto, RestaurantInfo, Title, Address } from './s
 
 import restaurante from '../../assets/restaurante-fake.png';
 
-const RestaurantCard = ({ restaurant }) => (
-  <Restaurant>
+const RestaurantCard = ({ restaurant, onClick }) => (
+  <Restaurant onClick={onClick}>
     <RestaurantInfo>
       <Title>{restaurant.name}</Title>
       <ReactStars
