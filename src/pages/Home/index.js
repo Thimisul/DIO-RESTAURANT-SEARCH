@@ -53,7 +53,7 @@ const Home = () => {
     <Wrapper>
       <Container>
         <Search>
-          <Logo src={logo} alt="Logo do Restaurante" />
+          <Logo src={logo} alt="Logo do Restaurante Cesar" />
           <TextField
             label="Pesquisar Restaurantes"
             outlined
